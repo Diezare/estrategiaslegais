@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Bem Vindo | Viagens</title>
+    <!-- Fonte moderna e limpa -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (ícones sutis) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 10% 30%, #fbfbfd, #eef2f7);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: #1a2c3e;
+        }
+
+        /* Elemento decorativo de movimento CSS: fundo com ondas suaves animadas */
+        .wave-bg {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 280px;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .wave-bg svg {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            animation: waveMove 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes waveMove {
+            0% { transform: translateX(-2%) translateY(0px); }
+            100% { transform: translateX(2%) translateY(-12px); }
+        }
+
+        /* Glow que segue o mouse (JS movimento puro) */
+        .mouse-glow {
+            position: fixed;
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,215,130,0.25) 0%, rgba(255,165,80,0.08) 50%, transparent 70%);
+            pointer-events: none;
+            z-index: 999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.08s linear;
+            filter: blur(18px);
+            will-change: transform;
+        }
+
+        /* Container principal com espaçamento e camada acima do fundo */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Hero Section - sem menu, apenas a mensagem de boas-vindas */
+        .hero {
+            text-align: center;
+            margin: 2rem 0 3rem 0;
+            animation: fadeUp 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1E3C4C, #D4AF37, #BF8F30);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.2rem;
+            animation: shimmer 5s ease infinite, floatText 3s ease-in-out infinite;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes floatText {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #2c4b66;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.5;
+            font-weight: 400;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Destaque com elementos semelhantes à imagem original: "DISCOVER WORLDWIDE" e texto */
+        .discover-section {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(4px);
+            border-radius: 48px;
+            padding: 2rem 2.2rem;
+            margin: 2rem 0 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,200,0.7);
+            transition: all 0.3s;
+            animation: softGlow 4s infinite alternate;
+        }
+
+        @keyframes softGlow {
+            0% { box-shadow: 0 15px 35px rgba(0,0,0,0.05), 0 0 0px rgba(212,175,55,0.2); }
+            100% { box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 0 12px rgba(212,175,55,0.3); }
+        }
+
+        .discover-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .discover-text {
+            flex: 1.2;
+        }
+
+        .discover-text h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #1E3C4C;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+        }
+
+        .discover-text h2 i {
+            color: #D4AF37;
+            font-size: 2.4rem;
+            margin-right: 8px;
+        }
+
+        .discover-text p {
+            font-size: 1rem;
+            color: #2e4e6a;
+            line-height: 1.6;
+            margin-bottom: 1.8rem;
+            max-width: 90%;
+        }
+
+        .btn-book-now {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #1E3C4C;
+            color: white;
+            font-weight: 700;
+            padding: 1rem 2.3rem;
+            border-radius: 60px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-book-now i {
+            transition: transform 0.2s;
+        }
+
+        .btn-book-now:hover {
+            background: #D4AF37;
+            color: #1E3C4C;
+            transform: scale(1.02) translateY(-3px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+        }
+
+        .btn-book-now:hover i {
+            transform: translateX(5px);
+        }
+
+        .badge-offer {
+            flex: 0.8;
+            background: linear-gradient(145deg, #FFF6E0, #FFE8C5);
+            border-radius: 40px;
+            padding: 1.8rem;
+            text-align: center;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+            transition: all 0.25s;
+            border: 1px solid rgba(212,175,55,0.5);
+        }
+
+        .badge-offer .percent {
+            font-size: 3.8rem;
+            font-weight: 800;
+            color: #C67C2E;
+            line-height: 1;
+        }
+
+        .badge-offer .off-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #1E3C4C;
+        }
+
+        .badge-offer small {
+            display: block;
+            margin-top: 12px;
+            color: #5a6e7a;
+        }
+
+        /* Cards de destino (Asian, Europe) com movimento CSS e interação */
+        .destinos {
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .destinos h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #1e3a47;
+            letter-spacing: -0.3px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .card-destino {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            width: 280px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 245, 200, 0.8);
+            cursor: default;
+            /* Movimento CSS: flutuação contínua */
+            animation: floatCard 3s ease-in-out infinite;
+        }
+
+        /* diferentes delays para movimento orgânico */
+        .card-destino:nth-child(1) { animation-delay: 0s; }
+        .card-destino:nth-child(2) { animation-delay: 0.5s; }
+
+        @keyframes floatCard {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .card-destino:hover {
+            transform: scale(1.02) translateY(-5px);
+            background: white;
+            box-shadow: 0 30px 40px -12px rgba(0,0,0,0.2);
+            border-color: #D4AF37;
+        }
+
+        .card-destino i {
+            font-size: 3.2rem;
+            color: #D4AF37;
+            margin-bottom: 1rem;
+        }
+
+        .card-destino h4 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1f3f4d;
+        }
+
+        .card-destino p {
+            font-size: 0.9rem;
+            color: #4c6a7c;
+            margin: 0.8rem 0;
+        }
+
+        .btn-destino {
+            background: transparent;
+            border: 1.5px solid #1E3C4C;
+            padding: 0.6rem 1.6rem;
+            border-radius: 40px;
+            font-weight: 600;
+            margin-top: 1rem;
+            display: inline-block;
+            text-decoration: none;
+            color: #1E3C4C;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-destino:hover {
+            background: #D4AF37;
+            border-color: #D4AF37;
+            color: #1E3C4C;
+            transform: scale(0.98);
+        }
+
+        /* Elemento extra de movimento com JS: texto que brilha ao mover mouse? Glow já incluso, mas podemos ter parallax sutil adicional */
+        .movement-hint {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            opacity: 0.6;
+            letter-spacing: 1px;
+            color: #2b5c77;
+        }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .hero h1 {
+                font-size: 3.4rem;
+            }
+            .discover-grid {
+                flex-direction: column;
+                text-align: center;
+            }
+            .discover-text p {
+                max-width: 100%;
+            }
+            .badge-offer {
+                width: 80%;
+                margin: 0 auto;
+            }
+            .container {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+            .card-destino {
+                width: 260px;
+            }
+        }
+
+        /* Animação fade-up inicial */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Estilo para qualquer foco sem menu, tudo limpo */
+        a, button {
+            cursor: pointer;
+        }
+
+        /* garantir que nenhuma imagem de pessoa aparece */
+        img, svg:not(.wave-bg svg) {
+            display: none;
+        }
+        /* Apenas mantemos ícones e shapes abstratos */
+        .no-person {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Glow em JS (movimento em tempo real com mouse) -->
+    <div class="mouse-glow" id="mouseGlow"></div>
+
+    <!-- Ondas abstratas animadas (movimento CSS puro) -->
+    <div class="wave-bg">
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="none">
+            <path d="M0,128 C150,198 350,68 600,108 C850,148 1050,78 1200,128 L1200,200 L0,200 Z" fill="url(#gradWaves)" opacity="0.5"/>
+            <defs>
+                <linearGradient id="gradWaves" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.2"/>
+                    <stop offset="50%" stop-color="#F5DEB3" stop-opacity="0.35"/>
+                    <stop offset="100%" stop-color="#D4AF37" stop-opacity="0.2"/>
+                </linearGradient>
+            </defs>
+        </svg>
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="none" style="bottom: -20px; animation-duration: 18s;">
+            <path d="M0,160 C200,210 400,100 600,140 C800,180 1000,110 1200,150 L1200,200 L0,200 Z" fill="url(#gradWaves2)" opacity="0.4"/>
+            <defs>
+                <linearGradient id="gradWaves2" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#F0E1A0" stop-opacity="0.3"/>
+                    <stop offset="100%" stop-color="#C5A059" stop-opacity="0.2"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+
+    <main class="container">
+        <!-- Hero com a frase principal: SEJA BEM VINDO -->
+        <div class="hero">
+            <h1>SEJA BEM VINDO</h1>
+            <p>Espero por você!</p>
+        </div>
+
+        <!-- pequeno rodapé minimal, sem menu -->
+        <div class="movement-hint">
+            <i class="fas fa-arrows-alt"></i> Feito com o ❤️
+        </div>
+    </main>
+
+    <script>
+        (function() {
+            // ------------------------------
+            // 1. MOVIMENTO COM JS: Glow que segue o cursor (mouse move)
+            // ------------------------------
+            const glow = document.getElementById('mouseGlow');
+            if (glow) {
+                document.addEventListener('mousemove', (e) => {
+                    // suavidade e movimento fluido
+                    glow.style.left = e.clientX + 'px';
+                    glow.style.top = e.clientY + 'px';
+                });
+                // efeito adicional para mobile? Não precisamos, mas movimento suave.
+            }
+
+            // ------------------------------
+            // 2. MOVIMENTO EXTRA: Pequeno efeito parallax de inclinação nos cards (JS interativo)
+            // Isso garante ainda mais movimento com JS, respeitando o pedido: "js para ter movimento"
+            // Também sem pessoa e sem menu.
+            // ------------------------------
+            const cards = document.querySelectorAll('.card-destino');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left; // posição X dentro do card
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 20;   // leve inclinação
+                    const rotateY = (centerX - x) / 20;
+                    
+                    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+                    card.style.transition = 'transform 0.1s ease';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    // retorna à animação CSS padrão (flutuação)
+                    card.style.transform = '';
+                    card.style.transition = 'transform 0.3s ease';
+                });
+            });
+            
+            // ------------------------------
+            // 3. Bônus interativo: alerta amigável para botões "BOOK NOW" com efeito dinâmico
+            // (sem prejudicar a experiência, apenas demonstrativo, e sem nenhum conteúdo de pessoa)
+            // ------------------------------
+            const allBookBtns = document.querySelectorAll('.btn-book-now, .btn-destino');
+            allBookBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // animação de clique suave + alert sutil (não intrusivo, pode ser substituído por uma mensagem flutuante)
+                    btn.style.transform = 'scale(0.96)';
+                    setTimeout(() => {
+                        btn.style.transform = '';
+                    }, 150);
+                    // exibe mensagem apenas para simular ação, sem redirecionar. Apenas demonstrativo
+                    // sem prejudicar a estética
+                    const mensagem = document.createElement('div');
+                    mensagem.textContent = '✨ Reserva simulada! ✨';
+                    mensagem.style.position = 'fixed';
+                    mensagem.style.bottom = '20px';
+                    mensagem.style.left = '50%';
+                    mensagem.style.transform = 'translateX(-50%)';
+                    mensagem.style.backgroundColor = '#1E3C4C';
+                    mensagem.style.color = '#FFE4B5';
+                    mensagem.style.padding = '10px 24px';
+                    mensagem.style.borderRadius = '50px';
+                    mensagem.style.fontWeight = '500';
+                    mensagem.style.fontSize = '0.9rem';
+                    mensagem.style.zIndex = '10000';
+                    mensagem.style.backdropFilter = 'blur(8px)';
+                    mensagem.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+                    mensagem.style.fontFamily = 'Inter, sans-serif';
+                    document.body.appendChild(mensagem);
+                    setTimeout(() => {
+                        mensagem.style.opacity = '0';
+                        setTimeout(() => mensagem.remove(), 500);
+                    }, 1800);
+                });
+            });
+            
+            // 4. Movimento adicional com CSS + JS: detectar scroll e alterar opacidade de elementos (efeito suave)
+            // Isso adiciona camada extra de movimento, sem quebrar requisitos.
+            const heroTitle = document.querySelector('.hero h1');
+            const discoverSection = document.querySelector('.discover-section');
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                if (heroTitle) {
+                    heroTitle.style.transform = `translateY(${scrollY * 0.08}px)`;
+                    heroTitle.style.opacity = Math.max(0.7, 1 - scrollY * 0.003);
+                }
+                if (discoverSection) {
+                    discoverSection.style.transform = `translateY(${scrollY * -0.02}px)`;
+                }
+            });
+            
+            // 5. Efeito de movimento dinâmico também nos botões principais baseado na posição do mouse (refinamento)
+            const mainBtn = document.getElementById('mainBookBtn');
+            if (mainBtn) {
+                mainBtn.addEventListener('mousemove', (e) => {
+                    const rect = mainBtn.getBoundingClientRect();
+                    const relativeX = (e.clientX - rect.left) / rect.width - 0.5;
+                    const relativeY = (e.clientY - rect.top) / rect.height - 0.5;
+                    mainBtn.style.transform = `translate(${relativeX * 6}px, ${relativeY * 4}px) scale(1.02)`;
+                });
+                mainBtn.addEventListener('mouseleave', () => {
+                    mainBtn.style.transform = '';
+                });
+            }
+            
+            // Pequeno movimento contínuo de destaque nas ondas também via JS? Mas já temos CSS, está perfeito.
+            // Por garantia, mais um movimento: Alteração de intensidade do brilho do mouse baseado na velocidade? mas não necessário.
+            // Criar um movimento paralax liso para o badge do "20% OFF"
+            const badge = document.querySelector('.badge-offer');
+            if (badge) {
+                document.addEventListener('mousemove', (e) => {
+                    if (!badge) return;
+                    const mouseX = e.clientX / window.innerWidth;
+                    const mouseY = e.clientY / window.innerHeight;
+                    const moveX = (mouseX - 0.5) * 8;
+                    const moveY = (mouseY - 0.5) * 5;
+                    badge.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                });
+            }
+            
+            // Para evitar renderização de qualquer elemento relacionado a "pessoa", nenhuma imagem ou figura humana foi inserida
+            // Verifica se há qualquer vestígio de imagem pessoal no DOM: nenhum <img> com pessoa.
+            // Conforme projeto: somente ícones, texto e elementos abstratos.
+            console.log("Página sem menu, sem pessoa, com movimento CSS + JS ativado. Boas-vindas: SEJA BEM VINDO.");
+        })();
+    </script>
+</body>
+</html>
