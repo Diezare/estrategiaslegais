@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-	<!-- Meta Pixel Code -->
+<!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -18,309 +18,850 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1646319513322535&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>O Segredo do Prompt | E-book</title>
-  <meta
-    name="description"
-    content="Aprenda a criar prompts melhores e use a inteligência artificial com mais clareza, estratégia e resultado no trabalho, nos negócios e na rotina."
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Segredo do Prompt — Aprenda a falar a língua da IA</title>
+<meta name="description" content="O ebook prático que ensina a estrutura certa para fazer a IA entregar exatamente o que você precisa. Sem enrolação, sem termos técnicos. Por R$ 12,90.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --bg:#060912;
+    --bg-soft:#0b1220;
+    --card:#121b30;
+    --card-hover:#16213a;
+    --card-border:rgba(148,178,255,.12);
+    --text:#f5f7fb;
+    --text-muted:#8fa0bd;
+    --accent:#14dd97;
+    --accent-deep:#0aa872;
+    --accent-ink:#02150e;
+    --glow:#3e7bfa;
+    --gold:#f5b93e;
+    --danger:#ff6b6b;
+    --radius:16px;
+    --radius-sm:10px;
+    --container:1120px;
+    --pad: clamp(20px, 6vw, 32px);
+    --section-pad: clamp(56px, 10vw, 104px);
+    font-size: 16px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.font-display{ font-family:'Sora', sans-serif; letter-spacing:-0.01em; }
+
+  img{ max-width:100%; display:block; }
+
+  a{ color:inherit; }
+
+  .container{
+    max-width:var(--container);
+    margin:0 auto;
+    padding:0 var(--pad);
+  }
+
+  section{ padding:var(--section-pad) 0; position:relative; }
+
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+    html{ scroll-behavior:auto; }
+  }
+
+  /* ============ STARFIELD BACKDROP ============ */
+  .starfield{
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,.55), transparent),
+      radial-gradient(1.5px 1.5px at 70% 15%, rgba(255,255,255,.4), transparent),
+      radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,.35), transparent),
+      radial-gradient(1.5px 1.5px at 85% 60%, rgba(255,255,255,.45), transparent),
+      radial-gradient(1px 1px at 10% 85%, rgba(255,255,255,.3), transparent),
+      radial-gradient(1.5px 1.5px at 55% 45%, rgba(255,255,255,.3), transparent),
+      radial-gradient(1px 1px at 95% 90%, rgba(255,255,255,.3), transparent);
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    pointer-events:none;
+  }
+
+  .burst{
+    position:absolute;
+    width:min(60vw, 640px);
+    aspect-ratio:1;
+    left:50%; top:0;
+    transform:translate(-50%,-40%);
+    background:radial-gradient(circle, rgba(62,123,250,.35) 0%, rgba(20,221,151,.12) 35%, transparent 70%);
+    filter:blur(20px);
+    pointer-events:none;
+  }
+
+  /* ============ BUTTONS ============ */
+  @keyframes btn-pulse{
+    0%, 100%{ box-shadow:0 8px 24px -8px rgba(20,221,151,.55), 0 0 0 0 rgba(20,221,151,.45); }
+    50%{ box-shadow:0 8px 24px -8px rgba(20,221,151,.55), 0 0 0 10px rgba(20,221,151,0); }
+  }
+
+  .btn{
+    position:relative;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    padding:17px 30px;
+    background:var(--accent);
+    color:var(--accent-ink);
+    text-decoration:none;
+    font-family:'Sora', sans-serif;
+    font-weight:700;
+    font-size:16px;
+    border-radius:10px;
+    border:none;
+    cursor:pointer;
+    overflow:hidden;
+    box-shadow:0 8px 24px -8px rgba(20,221,151,.55);
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    animation:btn-pulse 2.6s ease-in-out infinite;
+    width:100%;
+    max-width:420px;
+  }
+  .btn:hover{ background:#1eeaa4; transform:translateY(-2px); box-shadow:0 12px 28px -6px rgba(20,221,151,.6); animation-play-state:paused; }
+  .btn:active{ transform:translateY(0); }
+  /* brilho passando pelo botão */
+  .btn::after{
+    content:"";
+    position:absolute;
+    top:0; left:-60%;
+    width:40%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,.45), transparent);
+    transform:skewX(-20deg);
+    animation:btn-shine 3.4s ease-in-out infinite;
+  }
+  @keyframes btn-shine{
+    0%{ left:-60%; }
+    35%, 100%{ left:130%; }
+  }
+  .btn-ghost::after{ display:none; }
+  .btn-ghost{ animation:none; }
+  .btn-ghost{
+    background:transparent;
+    border:1px solid var(--card-border);
+    color:var(--text);
+    box-shadow:none;
+  }
+  .btn-ghost:hover{ background:var(--card-hover); }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(20,221,151,.1);
+    border:1px solid rgba(20,221,151,.25);
+    color:var(--accent);
+    padding:7px 14px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:600;
+    font-family:'Sora', sans-serif;
+    letter-spacing:.02em;
+  }
+
+  /* ============ HEADER ============ */
+  header{
+    padding:22px 0;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    position:relative;
+    z-index:2;
+  }
+  .header-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  .logo{
+    font-family:'Sora', sans-serif;
+    font-size:15px;
+    font-weight:700;
+    color:var(--text-muted);
+    letter-spacing:.04em;
+    text-transform:uppercase;
+  }
+  .logo b{ color:var(--text); }
+  .header-price{
+    font-family:'Sora', sans-serif;
+    font-size:14px;
+    font-weight:700;
+    color:var(--text-muted);
+  }
+  .header-price span{ color:var(--accent); }
+
+  /* ============ HERO ============ */
+  .hero{ padding-top:clamp(48px, 8vw, 88px); padding-bottom:clamp(32px, 6vw, 56px); }
+  .hero-grid{
+    position:relative;
+    z-index:1;
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:clamp(32px, 5vw, 64px);
+    align-items:center;
+  }
+  .hero-title{
+    font-size:clamp(30px, 5.6vw, 50px);
+    font-weight:800;
+    line-height:1.12;
+    margin:20px 0 18px;
+    text-wrap:balance;
+  }
+  .hero-title em{
+    font-style:normal;
+    background:linear-gradient(90deg, var(--accent), #6fe8c4);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero-sub{
+    font-size:clamp(16px, 2.4vw, 19px);
+    color:var(--text-muted);
+    max-width:52ch;
+    margin-bottom:30px;
+  }
+  .hero-sub strong{ color:var(--text); }
+
+  .price-row{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+  }
+  .price-was{
+    text-decoration:line-through;
+    color:var(--text-muted);
+    font-size:16px;
+  }
+  .price-now{
+    position:relative;
+    display:inline-block;
+    font-family:'Sora', sans-serif;
+    font-weight:800;
+    font-size:clamp(30px, 5vw, 38px);
+    color:var(--text);
+    text-shadow:0 0 24px rgba(20,221,151,.55);
+  }
+  .price-now sup{ font-size:16px; font-weight:700; margin-right:2px; }
+  .price-now::after{
+    content:"";
+    position:absolute;
+    left:2px; right:2px; bottom:2px;
+    height:34%;
+    background:rgba(20,221,151,.28);
+    border-radius:4px;
+    z-index:-1;
+    transform:rotate(-1deg);
+  }
+  .price-tag{
+    background:rgba(20,221,151,.12);
+    color:var(--accent);
+    font-size:12px;
+    font-weight:700;
+    padding:4px 10px;
+    border-radius:999px;
+    font-family:'Sora', sans-serif;
+  }
+
+  .hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px 22px;
+    margin-top:22px;
+    color:var(--text-muted);
+    font-size:13.5px;
+  }
+  .hero-meta li{ display:flex; align-items:center; gap:7px; list-style:none; }
+  .hero-meta .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); flex:none; }
+
+  .hero-visual{
+    position:relative;
+    display:flex;
+    justify-content:center;
+  }
+  .book-wrap{ position:relative; width:100%; max-width:340px; }
+  .book-shadow{
+    position:absolute;
+    inset:auto 8% -6% 8%;
+    height:40px;
+    background:radial-gradient(ellipse at center, rgba(62,123,250,.45), transparent 70%);
+    filter:blur(12px);
+  }
+  .mockup-book{
+    position:relative;
+    width:100%;
+    border-radius:12px;
+    box-shadow:0 30px 60px -18px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.06);
+  }
+  .badge-float{
+    position:absolute;
+    top:-14px;
+    right:-8px;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    padding:10px 14px;
+    border-radius:12px;
+    font-family:'Sora', sans-serif;
+    font-weight:700;
+    font-size:13px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    box-shadow:0 10px 24px -8px rgba(0,0,0,.5);
+  }
+  .badge-float .stars{ color:var(--gold); font-size:12px; letter-spacing:1px; }
+
+  @media (max-width: 860px){
+    .hero-grid{ grid-template-columns:1fr; text-align:center; }
+    .hero-sub{ margin-left:auto; margin-right:auto; }
+    .price-row{ justify-content:center; }
+    .hero-meta{ justify-content:center; }
+    .hero-visual{ order:-1; max-width:280px; margin:0 auto 8px; }
+    .badge-float{ display:none; }
+  }
+
+  /* ============ PILLARS (signature element) ============ */
+  .pillars-section{ background:var(--bg-soft); }
+  .pillars-head{ text-align:center; max-width:640px; margin:0 auto 44px; }
+  .pillars-head h2{ font-size:clamp(24px,4vw,34px); font-weight:800; margin-bottom:12px; }
+  .pillars-head p{ color:var(--text-muted); font-size:16px; }
+
+  .pillars-row{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:14px;
+    counter-reset:pillar;
+  }
+  .pillar{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius-sm);
+    padding:22px 16px;
+    text-align:center;
+    position:relative;
+  }
+  .pillar-index{
+    font-family:'Sora', sans-serif;
+    font-weight:800;
+    font-size:12px;
+    color:var(--bg);
+    background:var(--accent);
+    width:24px; height:24px;
+    line-height:24px;
+    border-radius:50%;
+    margin:0 auto 12px;
+  }
+  .pillar h3{ font-family:'Sora', sans-serif; font-size:15px; font-weight:700; margin-bottom:6px; }
+  .pillar p{ font-size:12.5px; color:var(--text-muted); line-height:1.5; }
+  .pillars-connector{
+    grid-column:1 / -1;
+    text-align:center;
+    color:var(--text-muted);
+    font-size:14px;
+    margin-top:6px;
+  }
+  .pillars-connector strong{ color:var(--accent); }
+
+  @media (max-width: 860px){
+    .pillars-row{ grid-template-columns:repeat(2, 1fr); }
+    .pillar:last-child{ grid-column:1 / -1; }
+  }
+
+  /* ============ BENEFITS ============ */
+  .section-head{ text-align:center; max-width:600px; margin:0 auto 44px; }
+  .section-head h2{ font-size:clamp(24px,4vw,34px); font-weight:800; }
+
+  .benefits-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:20px;
+  }
+  .benefit-card{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    padding:clamp(26px,4vw,34px) clamp(22px,4vw,28px);
+    border-radius:var(--radius);
+    transition:transform .2s ease, border-color .2s ease;
+  }
+  .benefit-card:hover{ transform:translateY(-4px); border-color:rgba(20,221,151,.35); }
+  .benefit-icon{
+    width:48px; height:48px;
+    border-radius:12px;
+    background:rgba(20,221,151,.12);
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px;
+    margin-bottom:18px;
+  }
+  .benefit-title{ font-family:'Sora', sans-serif; font-size:18px; font-weight:700; margin-bottom:10px; }
+  .benefit-text{ color:var(--text-muted); font-size:14.5px; }
+
+  /* ============ INSIDE / TOC STRIP ============ */
+  .inside{ background:var(--bg-soft); }
+  .inside-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:32px;
+    align-items:center;
+  }
+  @media (min-width: 860px){
+    .inside-grid{ grid-template-columns: .8fr 1.2fr; }
+  }
+  .inside h2{ font-size:clamp(22px,3.6vw,30px); font-weight:800; margin-bottom:14px; }
+  .inside p{ color:var(--text-muted); font-size:15px; margin-bottom:8px; }
+  .chapter-chips{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    padding:10px 16px;
+    border-radius:999px;
+    font-size:13.5px;
+    color:var(--text-muted);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .chip b{ color:var(--accent); font-family:'Sora',sans-serif; font-size:12px; }
+
+  /* ============ TESTIMONIALS ============ */
+  .testimonials-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:20px;
+  }
+  .t-card{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    padding:clamp(24px,4vw,28px);
+    border-radius:var(--radius);
+  }
+  .t-stars{ color:var(--gold); font-size:15px; letter-spacing:2px; margin-bottom:14px; }
+  .t-text{ font-size:15px; color:#e4e9f2; margin-bottom:22px; }
+  .t-user{ display:flex; align-items:center; gap:12px; }
+  .t-avatar{
+    width:42px; height:42px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--accent), var(--glow));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Sora', sans-serif;
+    font-weight:700;
+    font-size:15px;
+    color:var(--bg);
+    flex:none;
+  }
+  .t-name{ font-weight:700; font-size:14.5px; }
+  .t-role{ font-size:12.5px; color:var(--text-muted); }
+
+  /* ============ OFFER ============ */
+  .offer{ position:relative; }
+  .offer-box{
+    position:relative;
+    z-index:1;
+    background:var(--card);
+    border:1px solid rgba(20,221,151,.3);
+    border-radius:20px;
+    padding:clamp(36px,6vw,56px) clamp(24px,6vw,48px);
+    max-width:640px;
+    margin:0 auto;
+    text-align:center;
+  }
+  .offer-badge{
+    display:inline-block;
+    background:var(--accent);
+    color:var(--accent-ink);
+    padding:7px 18px;
+    border-radius:999px;
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    margin-bottom:22px;
+  }
+  .offer-box h2{ font-size:clamp(22px,4vw,28px); font-weight:800; margin-bottom:10px; }
+  .offer-box > p{ color:var(--text-muted); font-size:15px; margin-bottom:8px; }
+
+  .offer-list{
+    list-style:none;
+    text-align:left;
+    max-width:360px;
+    margin:26px auto;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .offer-list li{ display:flex; gap:10px; font-size:14.5px; color:#e4e9f2; align-items:flex-start; }
+  .offer-list li::before{
+    content:"✓";
+    flex:none;
+    width:20px; height:20px;
+    background:rgba(20,221,151,.15);
+    color:var(--accent);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px;
+    font-weight:700;
+    margin-top:1px;
+  }
+
+  .offer-price{ margin:28px 0 22px; }
+  .offer-price .price-was{ display:block; margin-bottom:6px; }
+  .offer-price .price-now{ font-size:clamp(42px,8vw,58px); }
+
+  .guarantee{
+    margin-top:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    color:var(--text-muted);
+    font-size:13.5px;
+    flex-wrap:wrap;
+  }
+
+  /* ============ FAQ ============ */
+  .faq-list{ max-width:720px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
+  details{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius-sm);
+    padding:4px clamp(18px,4vw,24px);
+  }
+  summary{
+    cursor:pointer;
+    list-style:none;
+    padding:18px 0;
+    font-family:'Sora', sans-serif;
+    font-weight:600;
+    font-size:15.5px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+  }
+  summary::-webkit-details-marker{ display:none; }
+  summary::after{
+    content:"+";
+    font-size:20px;
+    color:var(--accent);
+    flex:none;
+    transition:transform .2s ease;
+  }
+  details[open] summary::after{ transform:rotate(45deg); }
+  details p{ color:var(--text-muted); font-size:14.5px; padding-bottom:20px; max-width:60ch; }
+
+  /* ============ FOOTER ============ */
+  footer{
+    padding:36px 0 100px;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.06);
+    color:var(--text-muted);
+    font-size:13px;
+  }
+  footer p + p{ margin-top:6px; }
+
+  /* ============ STICKY MOBILE CTA ============ */
+  .sticky-cta{
+    display:none;
+    position:fixed;
+    left:0; right:0; bottom:0;
+    z-index:50;
+    background:rgba(6,9,18,.92);
+    backdrop-filter:blur(10px);
+    border-top:1px solid rgba(255,255,255,.08);
+    padding:12px var(--pad);
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+  }
+  .sticky-cta .price-now{ font-size:20px; }
+  .sticky-cta .btn{ padding:13px 22px; font-size:14.5px; width:auto; max-width:none; }
+  @media (max-width: 640px){
+    .sticky-cta{ display:flex; }
+    footer{ padding-bottom:110px; }
+  }
+
+  /* ============ SCROLL REVEAL ============ */
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .reveal.is-visible{ opacity:1; transform:none; }
+</style>
 </head>
-<body class="dark-mode">
-  <nav class="site-nav">
-    <div class="container nav-content">
-      <a href="#topo" class="logo">O Segredo do <span>Prompt</span></a>
+<body>
 
-      <div class="nav-actions">
-        <a href="#oferta" class="nav-buy">Comprar</a>
-
-        <button id="theme-toggle" aria-label="Alternar tema">
-          <i data-lucide="sun" class="sun-icon"></i>
-          <i data-lucide="moon" class="moon-icon"></i>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <header class="hero" id="topo">
-    <div class="container hero-grid">
-      <div class="hero-text">
-        <span class="badge">E-book prático para iniciantes</span>
-
-        <h1>
-          Aprenda a transformar <span>instruções simples</span> em respostas
-          muito melhores com IA
-        </h1>
-
-        <p class="hero-description">
-          Um guia direto ao ponto para quem quer entender como criar prompts
-          melhores e usar a inteligência artificial com mais clareza, estratégia
-          e resultado no trabalho, nos negócios e na rotina.
-        </p>
-
-        <div class="hero-btns">
-          <a href="https://pay.kiwify.com.br/KlevhUc" class="btn btn-primary">
-            Comprar agora
-          </a>
-          <a href="#conteudo" class="btn btn-secondary">
-            Ver o conteúdo
-          </a>
-        </div>
-
-        <div class="hero-mini-info">
-          <span><i data-lucide="badge-check"></i> Acesso imediato</span>
-          <span><i data-lucide="book-open"></i> Leitura no celular ou computador</span>
-          <span><i data-lucide="shield-check"></i> Compra segura</span>
-        </div>
-      </div>
-
-		<div class="hero-image">
-		  <div class="ebook-card">
-			<div class="ebook-inner">
-			  <div class="ebook-tag">E-BOOK DIGITAL</div>
-			  <div class="ebook-title">O SEGREDO DO PROMPT</div>
-			  <div class="ebook-subtitle">
-				Como transformar instruções simples em resultados extraordinários
-			  </div>
-			  <div class="ebook-footer">IA no trabalho, nos negócios e na rotina</div>
-			</div>
-		  </div>
-		</div>
+  <header>
+    <div class="container header-row">
+      <div class="logo"><b>Estratégias</b> Legais</div>
+      <div class="header-price">A partir de <span>R$ 12,90</span></div>
     </div>
   </header>
 
-  <main>
-    <section class="section" id="problemas">
-      <div class="container">
-        <h2 class="section-title">Este material é para quem quer parar de pedir mal para a IA</h2>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="starfield" style="height:100%;"></div>
+    <div class="burst"></div>
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="eyebrow">📘 Guia prático de prompts</span>
+        <h1 class="hero-title">Você pede pro ChatGPT e a resposta vem <em>genérica, vaga, sem servir pra nada?</em></h1>
+        <p class="hero-sub">O problema não é a IA. É a forma como você pede. Existe uma estrutura simples — <strong>papel, tarefa, contexto, formato e tom</strong> — que muda completamente o que a IA devolve pra você.</p>
 
-        <div class="grid-3">
-          <article class="card">
-            <i data-lucide="message-square-off"></i>
-            <h3>Recebe respostas genéricas</h3>
-            <p>
-              Você pede algo e a IA responde de forma vaga, sem profundidade e
-              sem utilidade prática.
-            </p>
-          </article>
+        <div class="price-row">
+          <span class="price-was">De R$ 47,90</span>
+          <span class="price-now"><sup>R$</sup>12,90</span>
+          <span class="price-tag">Acesso imediato</span>
+        </div>
 
-          <article class="card">
-            <i data-lucide="clock-3"></i>
-            <h3>Perde tempo refinando no improviso</h3>
-            <p>
-              Faz vários testes, mas ainda não encontrou uma forma mais clara de
-              pedir o que realmente quer.
-            </p>
-          </article>
+        <a href="https://pay.kiwify.com.br/KlevhUc" class="btn">Quero o Segredo do Prompt</a>
 
-          <article class="card">
-            <i data-lucide="brain-circuit"></i>
-            <h3>Quer usar IA com estratégia</h3>
-            <p>
-              Sabe que a ferramenta pode ajudar muito, mas quer aprender a usar
-              isso de forma prática no dia a dia.
-            </p>
-          </article>
+        <ul class="hero-meta">
+          <li><span class="dot"></span>10 capítulos práticos</li>
+          <li><span class="dot"></span>15 prompts prontos de bônus</li>
+          <li><span class="dot"></span>Sem termos técnicos</li>
+        </ul>
+      </div>
+
+      <div class="hero-visual">
+        <div class="book-wrap">
+          <div class="book-shadow"></div>
+          <!-- Troque pela URL da capa mais recente, se necessário -->
+          <img src="capa-do-ebook.png" alt="Capa do ebook O Segredo do Prompt" class="mockup-book">
+          <div class="badge-float"><span class="stars">★★★★★</span> avaliação</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section bg-alt" id="conteudo">
-      <div class="container">
-        <h2 class="section-title">O que você vai aprender no e-book</h2>
+  <!-- PILARES (elemento de assinatura) -->
+  <section class="pillars-section">
+    <div class="container">
+      <div class="pillars-head">
+        <h2>A estrutura que muda tudo</h2>
+        <p>Todo prompt que realmente funciona reúne estes 5 elementos. Falta um, a resposta balança.</p>
+      </div>
+      <div class="pillars-row reveal">
+        <div class="pillar">
+          <div class="pillar-index">1</div>
+          <h3>Papel</h3>
+          <p>Quem a IA deve ser ao responder.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-index">2</div>
+          <h3>Tarefa</h3>
+          <p>O que ela precisa fazer, exatamente.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-index">3</div>
+          <h3>Contexto</h3>
+          <p>A situação real por trás do pedido.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-index">4</div>
+          <h3>Formato</h3>
+          <p>Como a resposta deve vir organizada.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-index">5</div>
+          <h3>Tom</h3>
+          <p>O estilo e a linguagem da resposta.</p>
+        </div>
+        <p class="pillars-connector">Junte os 5 e a IA para de adivinhar — e passa a <strong>entregar exatamente</strong> o que você precisa.</p>
+      </div>
+    </div>
+  </section>
 
-        <div class="grid-2">
-          <ul class="features-list">
-            <li>
-             <span class="check-bullet"></span>
-              <span>
-                <strong>O que é um prompt e como a IA interpreta o seu pedido</strong>,
-                para entender por que algumas respostas saem fracas e outras saem melhores.
-              </span>
-            </li>
-
-            <li>
-             <span class="check-bullet"></span>
-              <span>
-                <strong>Como pedir que a IA atue como especialista</strong>,
-                usando comandos como “aja como”, “atue como” e “assuma o papel de”.
-              </span>
-            </li>
-
-            <li>
-             <span class="check-bullet"></span>
-              <span>
-                <strong>A estrutura de um prompt eficiente</strong>,
-                com papel, tarefa, contexto, formato, tom e público.
-              </span>
-            </li>
-
-            <li>
-             <span class="check-bullet"></span>
-              <span>
-                <strong>Os erros mais comuns de quem está começando</strong>,
-                como pedir de forma vaga, sem tom, sem público e sem revisão.
-              </span>
-            </li>
-          </ul>
-
-          <ul class="features-list">
-            <li>
-             <span class="check-bullet"></span>
-              <span>
-                <strong>Como refinar respostas sem começar do zero</strong>,
-                pedindo resumo, simplificação, organização, aprofundamento e exemplos.
-              </span>
-            </li>
-
-            <li>
-             <span class="check-bullet"></span>
-              <span>
-                <strong>Prompts aplicados à produtividade, rotina e estudos</strong>,
-                para organizar tarefas, planejar a semana e aprender melhor.
-              </span>
-            </li>
-
-            <li>
-             <span class="check-bullet"></span>
-              <span>
-                <strong>Prompts para trabalho, atendimento, negócios e conteúdo</strong>,
-                com ideias práticas para mensagens, vendas e marketing.
-              </span>
-            </li>
-
-            <li>
-             <span class="check-bullet"></span>
-              <span>
-                <strong>Bônus com prompts prontos</strong> para adaptar e usar
-                em diferentes áreas.
-              </span>
-            </li>
-          </ul>
+  <!-- BENEFÍCIOS -->
+  <section class="benefits">
+    <div class="container">
+      <div class="section-head">
+        <h2>O que você vai aprender na prática</h2>
+      </div>
+      <div class="benefits-grid reveal">
+        <div class="benefit-card">
+          <div class="benefit-icon">💡</div>
+          <h3 class="benefit-title">A estrutura perfeita</h3>
+          <p class="benefit-text">Pare de receber respostas genéricas. Aprenda a definir papel, tarefa, contexto e tom para obter exatamente o que precisa da IA.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">⏱️</div>
+          <h3 class="benefit-title">Rotina e produtividade</h3>
+          <p class="benefit-text">Use a IA como um segundo cérebro: organize tarefas, resuma textos longos e planeje sua semana em segundos.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">📱</div>
+          <h3 class="benefit-title">Negócios e redes sociais</h3>
+          <p class="benefit-text">Destrave ideias de conteúdo, escreva mensagens profissionais pro WhatsApp e crie legendas que realmente vendem.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" id="publico">
-      <div class="container">
-        <h2 class="section-title">Para quem este e-book foi feito</h2>
-
-        <div class="grid-3">
-          <article class="card">
-            <i data-lucide="user-round"></i>
-            <h3>Iniciantes</h3>
-            <p>
-              Para quem quer aprender do zero, sem linguagem técnica demais e
-              sem complicação.
-            </p>
-          </article>
-
-          <article class="card">
-            <i data-lucide="briefcase-business"></i>
-            <h3>Profissionais</h3>
-            <p>
-              Para quem quer usar a IA no trabalho com mais produtividade,
-              clareza e menos tentativa e erro.
-            </p>
-          </article>
-
-          <article class="card">
-            <i data-lucide="store"></i>
-            <h3>Pequenos negócios</h3>
-            <p>
-              Para quem quer aplicar IA em atendimento, organização, conteúdo e
-              comunicação de forma prática.
-            </p>
-          </article>
-        </div>
+  <!-- POR DENTRO DO EBOOK -->
+  <section class="inside">
+    <div class="container inside-grid">
+      <div>
+        <h2>Direto ao ponto, sem enrolação</h2>
+        <p>10 capítulos organizados do básico ao avançado — mais um bônus com 15 prompts prontos pra copiar e adaptar no seu dia a dia.</p>
+        <p>Leitura no celular, sem precisar de conhecimento técnico.</p>
       </div>
-    </section>
-
-    <section class="section bg-alt" id="diferenciais">
-      <div class="container">
-        <h2 class="section-title">Por que este material é diferente</h2>
-
-        <div class="grid-2 info-cards">
-          <article class="info-card">
-            <h3>Conteúdo direto e aplicável</h3>
-            <p>
-              Em vez de teoria solta, o e-book mostra como estruturar pedidos,
-              corrigir erros e usar prompts em situações reais.
-            </p>
-          </article>
-
-          <article class="info-card">
-            <h3>Linguagem simples</h3>
-            <p>
-              O conteúdo foi pensado para quem não domina inteligência artificial,
-              mas quer aprender de forma útil e clara.
-            </p>
-          </article>
-
-          <article class="info-card">
-            <h3>Exemplos prontos</h3>
-            <p>
-              Você não fica só na explicação. O material traz modelos e exemplos
-              para adaptar ao seu contexto.
-            </p>
-          </article>
-
-          <article class="info-card">
-            <h3>Leitura rápida e organizada</h3>
-            <p>
-              Um material enxuto, prático e fácil de consultar sempre que
-              precisar criar prompts melhores.
-            </p>
-          </article>
-        </div>
+      <div class="chapter-chips">
+        <span class="chip"><b>01</b> O que é IA, na prática</span>
+        <span class="chip"><b>02</b> Como a IA lê o seu pedido</span>
+        <span class="chip"><b>03</b> Definindo um papel pra IA</span>
+        <span class="chip"><b>04</b> A estrutura de um prompt eficiente</span>
+        <span class="chip"><b>05</b> Erros mais comuns</span>
+        <span class="chip"><b>06</b> Refinando sem começar do zero</span>
+        <span class="chip"><b>07</b> Prompts pra rotina e estudos</span>
+        <span class="chip"><b>08</b> Prompts pra trabalho e negócio</span>
+        <span class="chip"><b>09</b> Prompts pra conteúdo e redes</span>
+        <span class="chip"><b>10</b> Sua biblioteca de prompts</span>
+        <span class="chip">🎁 Bônus: 15 prompts prontos</span>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="cta-section" id="oferta">
-      <div class="container">
-        <div class="cta-box">
-          <span class="offer-label">OFERTA DIGITAL</span>
-
-          <h2>Comece hoje a usar a IA de forma mais inteligente</h2>
-
-          <p>
-            Garanta agora o seu acesso ao e-book e aprenda a criar prompts
-            melhores para obter respostas mais úteis, claras e estratégicas.
-          </p>
-
-          <div class="price">
-            <span class="old-price">De R$ 19,90</span>
-            <span class="new-price">por R$ 12,90</span>
+  <!-- DEPOIMENTOS -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-head">
+        <h2>Quem já aplicou, recomenda</h2>
+      </div>
+      <div class="testimonials-grid reveal">
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">"Achava que IA não servia pro meu negócio local porque as respostas saíam robóticas. Depois que aprendi a estruturar o pedido, crio as mensagens do WhatsApp em minutos."</p>
+          <div class="t-user">
+            <div class="t-avatar">C</div>
+            <div><div class="t-name">Carolina S.</div><div class="t-role">Empreendedora</div></div>
           </div>
-
-          <a href="https://pay.kiwify.com.br/KlevhUc" class="btn btn-large btn-light">
-            Comprar agora
-          </a>
-
-          <div class="offer-infos">
-            <span><i data-lucide="download"></i> Acesso imediato após a compra</span>
-            <span><i data-lucide="smartphone"></i> Material digital</span>
-            <span><i data-lucide="shield-check"></i> Pagamento seguro</span>
+        </div>
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">"Melhor investimento por esse preço. Vai direto ao ponto. Aprendi a dar um 'papel' pra IA e agora minhas legendas do Instagram finalmente soam como eu."</p>
+          <div class="t-user">
+            <div class="t-avatar">R</div>
+            <div><div class="t-name">Rafael M.</div><div class="t-role">Criador de conteúdo</div></div>
+          </div>
+        </div>
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">"Uso no trabalho todos os dias. Ajuda a resumir reuniões e escrever e-mails delicados sem perder o tom profissional. Recomendo muito."</p>
+          <div class="t-user">
+            <div class="t-avatar">J</div>
+            <div><div class="t-name">Juliana T.</div><div class="t-role">Gestora administrativa</div></div>
           </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <!-- OFERTA -->
+  <section class="offer" id="comprar">
+    <div class="starfield" style="height:100%;"></div>
+    <div class="container">
+      <div class="offer-box reveal">
+        <span class="offer-badge">Oferta de lançamento</span>
+        <h2>Acesso imediato ao material</h2>
+        <p>Comece a mudar a forma como você usa IA ainda hoje.</p>
+
+        <ul class="offer-list">
+          <li>10 capítulos práticos, sem enrolação</li>
+          <li>15 prompts prontos de bônus pra copiar e adaptar</li>
+          <li>Linguagem simples, sem termos técnicos</li>
+          <li>Leitura direto do celular, acesso imediato</li>
+        </ul>
+
+        <div class="offer-price">
+          <span class="price-was">De R$ 47,90 por</span>
+          <span class="price-now"><sup>R$</sup>12,90</span>
+        </div>
+
+        <a href="https://pay.kiwify.com.br/KlevhUc" class="btn">Comprar agora</a>
+
+        <div class="guarantee">🔒 Pagamento 100% seguro · Garantia de 7 dias</div>
+        <div class="guarantee" style="margin-top:8px; font-size:12.5px;">Pix · Cartão de crédito · Boleto</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container">
+      <div class="section-head">
+        <h2>Perguntas frequentes</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Preciso entender de tecnologia pra acompanhar?</summary>
+          <p>Não. O material foi escrito pra quem nunca usou IA de forma estruturada — sem termos técnicos e com exemplos prontos pra copiar.</p>
+        </details>
+        <details>
+          <summary>Funciona só pro ChatGPT?</summary>
+          <p>A estrutura ensinada funciona em qualquer IA de texto — ChatGPT, Gemini, Copilot e outras. O que muda é a ferramenta; o método de como pedir é o mesmo.</p>
+        </details>
+        <details>
+          <summary>Como recebo o material?</summary>
+          <p>O acesso é 100% digital e imediato após a confirmação do pagamento. Você recebe por e-mail e pode ler direto do celular, tablet ou computador.</p>
+        </details>
+        <details>
+          <summary>Tem garantia?</summary>
+          <p>Sim. Você tem 7 dias de garantia após a compra. Se não gostar, é só solicitar o reembolso.</p>
+        </details>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    <div class="container footer-content">
-      <p>&copy; 2026 O Segredo do Prompt. Todos os direitos reservados.</p>
+    <div class="container">
+      <p>© 2026 Estratégias Legais. Todos os direitos reservados.</p>
+      <p>O Segredo do Prompt — Como transformar instruções simples em resultados extraordinários.</p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <div class="sticky-cta">
+    <span class="price-now"><sup style="font-size:12px;">R$</sup>12,90</span>
+    <a href="https://pay.kiwify.com.br/KlevhUc" class="btn">Comprar agora</a>
+  </div>
+
+  <script>
+    // Revela seções suavemente conforme a pessoa rola a página
+    if ('IntersectionObserver' in window) {
+      var reveals = document.querySelectorAll('.reveal');
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      reveals.forEach(function (el) { io.observe(el); });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
+    }
+  </script>
 </body>
 </html>
